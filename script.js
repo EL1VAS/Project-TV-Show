@@ -22,7 +22,7 @@ function makePageForEpisodes(episodeList) {
     episodeCode.className = "episode-title";
 
     const episodeImage = document.createElement("img"); // Image of the episode
-    episodeImage.src = episode.image.medium; // Displays the medium image
+    episodeImage.src = episode.image.medium.replace(/^http:/, "https:"); // Displays the medium image, changing http to https sop it can pass the lighthouse test of best practices
     episodeImage.className = "episode-img";
     episodeImage.setAttribute("alt", `Episode ${episodeCode}`);
 
