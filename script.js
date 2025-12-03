@@ -24,6 +24,7 @@ function makePageForEpisodes(episodeList) {
     const episodeImage = document.createElement("img"); // Image of the episode
     episodeImage.src = episode.image.medium; // Displays the medium image
     episodeImage.className = "episode-img";
+    episodeImage.setAttribute("alt", `Episode ${episodeCode}`);
 
     const episodeDescription = document.createElement("p"); // Description of the episode
     episodeDescription.innerHTML = episode.summary; // Displays the summary of the episode without the <p><\p> characters showing
