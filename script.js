@@ -22,7 +22,7 @@ function makePageForEpisodes(episodeList) {
     const episodeImage = document.createElement("img"); // Image of the episode
     episodeImage.src = episode.image.medium; // Displays the medium image
 
-    const episodeDescription = document.createElement("article"); // Description of the episode
+    const episodeDescription = document.createElement("p"); // Description of the episode
     episodeDescription.textContent = episode.summary; // Displays the summary of the episode
 
     episodeCard.appendChild(episodeTitle); // Appended the title,
