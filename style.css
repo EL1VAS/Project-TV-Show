@@ -1,7 +1,29 @@
 #root {
-  color: red;
+  color: darkgreen; /* All letters */
+  display: grid; /* Puts cards in a grid */
+  grid-template-columns: repeat(
+    3,
+    1fr
+  ); /* creates a 3 cards per row that repeats itself */
+  gap: 20px; /* gap between cards */
+  padding: 20px;
 }
 
 body {
   background-color: bisque;
+}
+
+.episode-card {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 4px;
+  padding: 15px;
+  background-color: white;
+}
+
+.episode-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
