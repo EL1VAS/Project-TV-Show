@@ -14,8 +14,8 @@ function makePageForEpisodes(episodeList) {
 
     const episodeCard = document.createElement("div"); // Main episode card
 
-    const episodeTitle = document.createElement("h2"); // Title of episode
-    episodeTitle.textContent = `${episode.name} - S${episode.season
+    const episodeCode = document.createElement("h2"); // Title of episode
+    episodeCode.textContent = `${episode.name} - S${episode.season
       .toString()
       .padStart(2, "0")}E${episode.number.toString().padStart(2, "0")}`; // Title display with season and episode number padded with a 0 in front
 
@@ -25,7 +25,7 @@ function makePageForEpisodes(episodeList) {
     const episodeDescription = document.createElement("p"); // Description of the episode
     episodeDescription.innerHTML = episode.summary; // Displays the summary of the episode without the <p><\p> characters showing
 
-    episodeCard.appendChild(episodeTitle); // Appended the title,
+    episodeCard.appendChild(episodeCode); // Appended the title,
     episodeCard.appendChild(episodeImage); // image and
     episodeCard.appendChild(episodeDescription); // summary to the episode card
 
