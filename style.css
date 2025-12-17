@@ -10,7 +10,9 @@
 }
 
 body {
-  background-color: bisque;
+  background-color: rgb(27, 25, 25);
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .episode-card {
@@ -19,11 +21,25 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /*shadow in card */
   border: 4px; /* size of the outline of the box */
   padding: 15px; /* padding inside the card, pushes internal elements to the center */
-  background-color: white; /* color of the card */
+  background-color: black; /* color of the card */
+  color: white;
+  text-align: center;
 }
 
 .episode-img {
   width: 100%; /* adjust in the whole width */
-  height: auto; /* adjusts according to the rest of elements */
+  aspect-ratio: 16 / 9; /*width / height*/
+  object-fit: cover; /*maintain the aspect ratio */
+  /*height: auto; adjusts according to the rest of elements */
   border-radius: 8px; /* rounded edges of photo */
+}
+
+a{
+  text-decoration: none;
+  color: white;
+}
+
+a:hover{
+  background-color: white;
+  color: black;
 }
