@@ -23,7 +23,8 @@ function populateEpisodeSelector(episodes) {
 function setup() {
   const allEpisodes = getAllEpisodes(); //Get the array
   populateEpisodeSelector(allEpisodes);
-  makePageForEpisodes(allEpisodes); // Pass array to the function
+  makePageForEpisodes(allEpisodes);
+  onEpisodeSelect(); // Pass array to the function
 }
 
 function makePageForEpisodes(episodeList) {
@@ -57,6 +58,24 @@ function makePageForEpisodes(episodeList) {
 
     rootElem.appendChild(episodeCard); // Appended episode card to root element
   }
+}
+
+function onEpisodeSelect() {
+  const select = document.getElementById("episode-select");
+
+  select.addEventListener("change", function (event) {
+    const selectId = event.target.value;
+    const allEpisodes = getAllEpisodes();
+
+    if (selectId === "") {
+      makePageForEpisodes(allEpisodes);
+      return;
+    }
+    const selectEpisode = allEpisodes.filter(function (episode) {
+      return episode.id == selectId;
+    });
+    makePageForEpisodes(selectEpisode);
+  })
 }
 
 window.onload = setup;
