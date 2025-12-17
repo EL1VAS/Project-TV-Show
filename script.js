@@ -3,7 +3,7 @@ function populateEpisodeSelector(episodes) {
   const select = document.getElementById("episode-select");
 
   for (let i = 0; i < episodes.length; i++) {
-    const episode = episodes [1];
+    const episode = episodes [i];
 
     const option = document.createElement("option");
 
@@ -22,6 +22,7 @@ function populateEpisodeSelector(episodes) {
 
 function setup() {
   const allEpisodes = getAllEpisodes(); //Get the array
+  populateEpisodeSelector(allEpisodes);
   makePageForEpisodes(allEpisodes); // Pass array to the function
 }
 
