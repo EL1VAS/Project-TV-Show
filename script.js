@@ -1,4 +1,24 @@
 //You can edit ALL of the code here
+function populateEpisodeSelector(episodes) {
+  const select = document.getElementById("episode-select");
+
+  for (let i = 0; i < episodes.length; i++) {
+    const episode = episodes [1];
+
+    const option = document.createElement("option");
+
+    const episodeCode = `S${episode.season
+      .toString()
+      .padStart(2, "0")}E${episode.number
+      .toString()
+      .padStart(2, "0")}`;
+
+    option.textContent = `${episodeCode} - ${episode.name}`;
+    option.value = episode.id;
+
+    select.appendChild(option);
+  }
+}
 
 function setup() {
   const allEpisodes = getAllEpisodes(); //Get the array
