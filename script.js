@@ -5,21 +5,18 @@ function populateEpisodeSelector(episodes) {
   const select = document.getElementById("episode-select");
 
   for (let i = 0; i < episodes.length; i++) {
-    const episode = episodes [i];
- // add new elements to our dropdown menu
+    const episode = episodes[i];
+    // add new elements to our dropdown menu
     const option = document.createElement("option");
-
 
     //created the ep code
     const episodeCode = `S${episode.season
       .toString()
-      .padStart(2, "0")}E${episode.number
-      .toString()
-      .padStart(2, "0")}`;
+      .padStart(2, "0")}E${episode.number.toString().padStart(2, "0")}`;
 
-      //option elements: set the text shown in the dropdown, 
-      //store the episode is as value and add the option to 
-      // the selected element (add it to the dropdown menu)
+    //option elements: set the text shown in the dropdown,
+    //store the episode is as value and add the option to
+    // the selected element (add it to the dropdown menu)
     option.textContent = `${episodeCode} - ${episode.name}`;
     option.value = episode.id;
     select.appendChild(option);
@@ -45,9 +42,11 @@ function makePageForEpisodes(episodeList) {
     episodeCard.className = "episode-card";
 
     const episodeCode = document.createElement("h2"); // Title of episode
-    episodeCode.textContent = `${episode.name} - S${episode.season
+    episodeCode.textContent = `S${episode.season
       .toString()
-      .padStart(2, "0")}E${episode.number.toString().padStart(2, "0")}`; // Title display with season and episode number padded with a 0 in front
+      .padStart(2, "0")}E${episode.number.toString().padStart(2, "0")} - ${
+      episode.name
+    }`; // Title display with season and episode number padded with a 0 in front
     episodeCode.className = "episode-title";
 
     const episodeImage = document.createElement("img"); // Image of the episode
@@ -72,15 +71,15 @@ function onSearchInput() {
   const searchInput = document.getElementById("search-input");
 
   //listen for user typing in the search box
-  searchInput.addEventListener("input", function (event){
+  searchInput.addEventListener("input", function (event) {
     //get the input and makes it lowercase
     const searchTerm = event.target.value.toLowerCase();
     const allEpisodes = getAllEpisodes();
-    
+
     // filters by name of summary
-    const filteredEpisodes = allEpisodes.filter(function (episode){
+    const filteredEpisodes = allEpisodes.filter(function (episode) {
       return (
-        episode.name.toLowerCase().includes(searchTerm) || 
+        episode.name.toLowerCase().includes(searchTerm) ||
         episode.summary.toLowerCase().includes(searchTerm)
       );
     });
@@ -110,7 +109,7 @@ function onEpisodeSelect() {
       return episode.id == selectId;
     });
     makePageForEpisodes(selectEpisode); // only shows selected episode
-  })
+  });
 }
 
 window.onload = setup;
