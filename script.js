@@ -87,7 +87,7 @@ function onSearchInput() {
 
     //update the episode count
     const count = document.getElementById("episode-count");
-    count.textContent = `Showing ${filteredEpisodes.length} episodes`;
+    count.textContent = `Showing ${filteredEpisodes.length} out of ${allEpisodes.length} episodes`;
   });
 }
 
