@@ -9,6 +9,14 @@
   padding: 20px; /* padding between browser edges and main body */
 }
 
+header {
+  padding: 20px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 body {
   background-color: rgb(27, 25, 25);
   color: white;
