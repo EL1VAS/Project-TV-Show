@@ -7,6 +7,7 @@
   ); /* creates a 3 cards per row that repeats itself */
   gap: 20px; /* gap between cards */
   padding: 20px; /* padding between browser edges and main body */
+  min-height: 100vh;
 }
 
 header {
