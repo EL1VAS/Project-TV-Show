@@ -26,7 +26,6 @@ function populateEpisodeSelector(episodes) {
 }
 
 function setup() {
-  const allEpisodes = getAllEpisodes(); //Get the array
   populateEpisodeSelector(allEpisodes); // adds the episodes to the dropdown menu
   makePageForEpisodes(allEpisodes);
   onEpisodeSelect(); // Pass array to the function
@@ -76,7 +75,7 @@ function onSearchInput() {
   searchInput.addEventListener("input", function (event) {
     //get the input and makes it lowercase
     const searchTerm = event.target.value.toLowerCase();
-    const allEpisodes = getAllEpisodes();
+    const allEpisodes = window.allEpisodes; // takes the fetched all episodes
 
     // filters by name of summary
     const filteredEpisodes = allEpisodes.filter(function (episode) {
@@ -100,7 +99,7 @@ function onEpisodeSelect() {
   select.addEventListener("change", function (event) {
     // get the selected episode
     const selectId = event.target.value;
-    const allEpisodes = getAllEpisodes();
+    const allEpisodes = window.allEpisodes; // takes fetched all episodes
 
     // if the option ALL EPISODES is selected, it shows all episodes
     if (selectId === "") {
