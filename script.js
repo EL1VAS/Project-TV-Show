@@ -1,7 +1,7 @@
 //You can edit ALL of the code here
 
 //At lvl 300 I have decided to clean the code for a better feature use and easy reading
-const API_URL = "https://api.tvmaze.com/shows/WRONG/episodes";
+const API_URL = "https://api.tvmaze.com/shows/82/episodes";
 
 let allEpisodes = []; // Added to hold our fetched data, full list
 let filteredEpisodes = []; // Episodes currently shown, so the functions below alters this list rather than the allEpisodes one
