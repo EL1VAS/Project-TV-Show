@@ -68,8 +68,8 @@ function makePageForEpisodes(episodeList) {
     episodeImage.src = episode.image.medium.replace(/^http:/, "https:"); // Displays the medium image, changing http to https sop it can pass the lighthouse test of best practices
     episodeImage.className = "episode-img"; // For styling
     episodeImage.setAttribute("alt", `Episode ${episodeCode.textContent}`);
-    episodeImage.width = 210; // Added this for better performance
-    episodeImage.height = 118;
+    episodeImage.setAttribute("width", "210"); // Added this for better performance
+    episodeImage.setAttribute("height", "118");
 
     const episodeDescription = document.createElement("p"); // Description of the episode
     episodeDescription.innerHTML = episode.summary; // Displays the summary of the episode without the <p><\p> characters showing
