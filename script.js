@@ -113,4 +113,22 @@ function onEpisodeSelect() {
   });
 }
 
-window.onload = setup;
+window.onload = function () {
+  const rootElem = document.getElementById("root");
+  rootElem.textContent = "Loading Episodes...";
+
+  fetch("https://api.tvmaze.com/shows/82/episodes")
+    .then(function (response) {
+      // returns the response as a json file
+      return response.json();
+    })
+    .then(function (data) {
+      allEpisodes = data; // Fills the empty array in our global scope
+      rootElem.textContent = ""; // Clear loading text
+      setup(); // Now we run all functions with the data that we fetced and filled the empty array
+    })
+    .catch(function (error) {
+      rootElem.textContent = "Error loading episodes, please try again later.";
+      console.error(error);
+    });
+};
