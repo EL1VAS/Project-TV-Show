@@ -10,6 +10,14 @@
   min-height: 100vh;
 }
 
+.loading-message {
+  grid-column: 1 / -1; /* span all columns */
+  text-align: center;
+  padding: 50px;
+  color: white;
+  font-size: 18px;
+}
+
 header {
   padding: 20px;
   display: flex;
