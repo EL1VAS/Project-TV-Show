@@ -28,6 +28,11 @@ function populateEpisodeSelector(episodes) {
 function setup() {
   populateEpisodeSelector(allEpisodes); // adds the episodes to the dropdown menu
   makePageForEpisodes(allEpisodes);
+
+  //update the episode count
+  const count = document.getElementById("episode-count");
+  count.textContent = `Showing ${filteredEpisodes.length} out of ${allEpisodes.length} episodes`;
+
   onEpisodeSelect(); // Pass array to the function
   onSearchInput(); // live search functionality
 }
@@ -75,7 +80,6 @@ function onSearchInput() {
   searchInput.addEventListener("input", function (event) {
     //get the input and makes it lowercase
     const searchTerm = event.target.value.toLowerCase();
-    const allEpisodes = window.allEpisodes; // takes the fetched all episodes
 
     // filters by name of summary
     const filteredEpisodes = allEpisodes.filter(function (episode) {
@@ -99,7 +103,6 @@ function onEpisodeSelect() {
   select.addEventListener("change", function (event) {
     // get the selected episode
     const selectId = event.target.value;
-    const allEpisodes = window.allEpisodes; // takes fetched all episodes
 
     // if the option ALL EPISODES is selected, it shows all episodes
     if (selectId === "") {
