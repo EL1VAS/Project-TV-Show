@@ -34,12 +34,30 @@ body {
   border-radius: 8px; /* rounded edges of photo */
 }
 
-a{
+a {
   text-decoration: none;
   color: white;
 }
 
-a:hover{
+a:hover {
   background-color: white;
   color: black;
+}
+
+#episode-select {
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 2px solid white;
+  background-color: black;
+  color: white;
+}
+
+#search-input {
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 2px solid white;
+  background-color: black;
+  color: white;
 }
