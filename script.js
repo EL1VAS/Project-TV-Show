@@ -9,7 +9,10 @@ let filteredEpisodes = []; // Episodes currently shown, so the functions below a
 window.onload = function () {
   // Moved it up
   const rootElem = document.getElementById("root");
-  rootElem.textContent = "Loading Episodes...";
+  const loadingDiv = document.createElement("div");
+  loadingDiv.className = "loading-message";
+  loadingDiv.textContent = "Loading episodes...";
+  rootElem.appendChild(loadingDiv);
 
   fetch(API_URL)
     .then(function (response) {
