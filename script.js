@@ -1,5 +1,7 @@
 //You can edit ALL of the code here
 
+let allEpisodes = []; // Added to hold our fetched data
+
 // dropdown function - fills the menu with all episodes information
 function populateEpisodeSelector(episodes) {
   const select = document.getElementById("episode-select");
