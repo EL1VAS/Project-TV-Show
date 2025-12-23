@@ -104,6 +104,9 @@ function onEpisodeSelect() {
     // get the selected episode
     const selectedId = event.target.value;
 
+    // Reset search box
+    document.getElementById("search-input").value = "";
+
     // if the option ALL EPISODES is selected, it shows all episodes
     if (selectedId === "") {
       filteredEpisodes = allEpisodes;
@@ -136,6 +139,9 @@ function onSearchInput() {
   //listen for user typing in the search box
   searchInput.addEventListener("input", function (event) {
     const searchTerm = event.target.value.toLowerCase(); //get the input and makes it lowercase
+
+    // Reset dropdown to "All episodes"
+    document.getElementById("episode-select").value = "";
 
     // filters by name of summary
     const filteredEpisodes = allEpisodes.filter(function (episode) {
