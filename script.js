@@ -63,6 +63,28 @@ function setup() {
   onSearchInput(); // live search functionality later
 }
 
+function populateShowSelector(shows) {
+  const showSelect = document.getElementById("show-select");
+  showSelect.textContent = "";
+
+  // sort alphabetically, not case sensitive
+  const sortedShows = shows.sort((a, b) =>
+  a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+  );
+
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = "Select a show";
+  showSelect.appendChild(defaultOption);
+
+  for (let show of sortedShows) {
+    const option = document.createElement("option");
+    option.value = show.id;
+    option.textContent = show.name;
+    showSelect.appendChild(option);
+  }
+}
+
 function makePageForEpisodes(episodeList) {
   // Receive it as an episode list
   const rootElem = document.getElementById("root"); // Access the root in html
