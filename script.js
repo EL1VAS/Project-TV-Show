@@ -1,7 +1,7 @@
 //You can edit ALL of the code here
 
 //At lvl 300 I have decided to clean the code for a better feature use and easy reading
-const API_URL = "https://api.tvmaze.com/shows/82/episodes";
+//const API_URL = "https://api.tvmaze.com/shows/82/episodes";
 
 let allEpisodes = []; // Added to hold our fetched data, full list
 let filteredEpisodes = []; // Episodes currently shown, so the functions below alters this list rather than the allEpisodes one
@@ -10,10 +10,25 @@ const SHOWS_API_URL = "https://api.tvmaze.com/shows";
 
 let allShows = []; // stores all fetched shows
 let episodeCache = {}; // to not fetch the same URL twice
+
 window.onload = function () {
   // Moved it up
   const rootElem = document.getElementById("root");
-  const loadingDiv = document.createElement("div");
+  rootElem.textContent = "Loading shows...";
+
+  fetch(SHOWS_API_URL)
+  .then((response) => response.json())
+  .then((data) => {
+    allShows = data;
+    populateShowSelector(allShows);
+    rootElem.textContent = "Please select a show";
+    onShowSelect();
+  })
+  .catch((error) => {
+    rootElem.textContent = "Error loading shows";
+    console.error(error);
+  });
+  /*const loadingDiv = document.createElement("div");
   loadingDiv.className = "loading-message";
   loadingDiv.textContent = "Loading episodes...";
   rootElem.appendChild(loadingDiv);
@@ -32,7 +47,7 @@ window.onload = function () {
     .catch(function (error) {
       rootElem.textContent = "Error loading episodes, please try again later.";
       console.error(error);
-    });
+    });*/
 };
 
 function setup() {
