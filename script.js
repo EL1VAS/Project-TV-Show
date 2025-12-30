@@ -96,7 +96,7 @@ function onShowSelect() {
     '<option value="">All episodes</option>';
     document.getElementById("search-input").value = "";
 
-    if (!showID) {
+    if (!showId) {
       document.getElementById("root").textContent = "Please select a show";
       return;
     }
@@ -106,7 +106,7 @@ function onShowSelect() {
       return;
     }
     // otherwise fetch episodes
-    const episodesURL = ´https://api.tvmaze.com/shows/${showId}/episodes´;
+    const episodesURL = `https://api.tvmaze.com/shows/${showId}/episodes`;
 
     fetch(episodesURL)
     .then((response)=> response.json())
@@ -153,7 +153,7 @@ function makePageForEpisodes(episodeList) {
     episodeImage.className = "episode-img"; // For styling
     episodeImage.setAttribute("alt", `Episode ${episodeCode.textContent}`);
     episodeImage.setAttribute("width", "210"); // Added this for better performance
-    episodeImage.setAttribute("height", "118");
+    episodeImage.setAttribute("height", "300");
 
     const episodeDescription = document.createElement("p"); // Description of the episode
     episodeDescription.innerHTML = episode.summary; // Displays the summary of the episode without the <p><\p> characters showing
@@ -170,6 +170,8 @@ function makePageForEpisodes(episodeList) {
 // dropdown function - fills the menu with all episodes information
 function populateEpisodeSelector(episodes) {
   const select = document.getElementById("episode-select");
+
+  select.innerHTML = '<option value="">All episodes</option>';
 
   for (let i = 0; i < episodes.length; i++) {
     const episode = episodes[i];
