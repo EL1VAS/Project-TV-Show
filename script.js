@@ -85,6 +85,43 @@ function populateShowSelector(shows) {
   }
 }
 
+function onShowSelect() {
+  const showSelect = document.getElementById("show-select");
+
+  showSelect.addEventListener("change", function (event) {
+    const showId = event.target.value;
+
+    // reset controls
+    document.getElementById("episode-select").innerHTML =
+    '<option value="">All episodes</option>';
+    document.getElementById("search-input").value = "";
+
+    if (!showID) {
+      document.getElementById("root").textContent = "Please select a show";
+      retunr;
+    }
+    // If episodes already fetched, reuse
+    if (episodesCache[showId]) {
+      loadEpisodes(episodesCache[showId]);
+      return;
+    }
+    // otherwise fetch episodes
+    const episodesURL = ´https://api.tvmaze.com/shows/${showId}/episodes´;
+
+    fetch(episodesURL)
+    .then((response)=> response.json())
+    .then((episodes) => {
+      episodesCache[showId] = episodes; // cache result
+      loadEpisodes(episodes);
+    })
+    .catch((error)=>{
+      document.getElementById("root").textContent =
+        "Error loading episodes";
+      console.error(error);
+    });
+  });
+}
+
 function makePageForEpisodes(episodeList) {
   // Receive it as an episode list
   const rootElem = document.getElementById("root"); // Access the root in html
