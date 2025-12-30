@@ -6,6 +6,10 @@ const API_URL = "https://api.tvmaze.com/shows/82/episodes";
 let allEpisodes = []; // Added to hold our fetched data, full list
 let filteredEpisodes = []; // Episodes currently shown, so the functions below alters this list rather than the allEpisodes one
 
+const SHOWS_API_URL = "https://api.tvmaze.com/shows";
+
+let allShows = []; // stores all fetched shows
+let episodeCache = {}; // to not fetch the same URL twice
 window.onload = function () {
   // Moved it up
   const rootElem = document.getElementById("root");
