@@ -9,7 +9,7 @@ let filteredEpisodes = []; // Episodes currently shown, so the functions below a
 const SHOWS_API_URL = "https://api.tvmaze.com/shows";
 
 let allShows = []; // stores all fetched shows
-let episodeCache = {}; // to not fetch the same URL twice
+let episodesCache = {}; // to not fetch the same URL twice
 
 window.onload = function () {
   // Moved it up
@@ -98,7 +98,7 @@ function onShowSelect() {
 
     if (!showID) {
       document.getElementById("root").textContent = "Please select a show";
-      retunr;
+      return;
     }
     // If episodes already fetched, reuse
     if (episodesCache[showId]) {
@@ -122,6 +122,12 @@ function onShowSelect() {
   });
 }
 
+function loadEpisodes(episodes) {
+  allEpisodes = episodes;
+  filteredEpisodes = episodes;
+
+  setup(); // reuses everything already built
+}
 function makePageForEpisodes(episodeList) {
   // Receive it as an episode list
   const rootElem = document.getElementById("root"); // Access the root in html
