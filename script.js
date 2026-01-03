@@ -21,7 +21,7 @@ window.onload = function () {
   .then((data) => {
     allShows = data;
     populateShowSelector(allShows);
-    rootElem.textContent = "Please select a show";
+    makePageForShows(allShows);
     onShowSelect();
   })
   .catch((error) => {
@@ -165,6 +165,40 @@ function makePageForEpisodes(episodeList) {
 
     rootElem.appendChild(episodeCard); // Appended episode card to root element
   }
+}
+
+//function to display all shows when the page loads, before a show gets selected
+function makePageForShows(showList) {
+  const rootElem = document.getElementById("root");
+  rootElem.textContent = "";
+
+  for (let i = 0; i < showList.length; i++) {
+    const show = showList[i];
+
+    const showCard = document.createElement("div");
+    showCard.className = "episode-card";
+    
+    const showTitle = document.createElement("h2");
+      showTitle.textContent = show.name;
+
+      const showImage = document.createElement ("img");
+      showImage.className = "episode-img";
+      showImage.src = show.image
+      ? show.image.medium.replace(/^http:/, "https:")
+      : "";
+      showImage.alt = show.name;
+
+      const showSummary = document.createElement ("p");
+      showSummary.innerHTML = show.summary || "No description available";
+
+      showCard.appendChild(showTitle);
+      showCard.appendChild(showImage);
+      showCard.appendChild(showSummary);
+
+      rootElem.appendChild(showCard);
+  }
+  const count = document.getElementById("episode-count");
+  count.textContent = `Showing ${showList.length} shows`;
 }
 
 // dropdown function - fills the menu with all episodes information
