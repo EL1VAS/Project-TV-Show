@@ -19,6 +19,7 @@ function showShowsView() {
   document.getElementById("episode-select").style.display = "none";
   document.getElementById("search-input").style.display = "none";
   document.getElementById("episode-count").style.display = "none";
+  document.getElementById("episode-select-label").style.display = "none";
 }
 
 function showEpisodesView() {
@@ -29,6 +30,7 @@ function showEpisodesView() {
   document.getElementById("episode-select").style.display = "block";
   document.getElementById("search-input").style.display = "block";
   document.getElementById("episode-count").style.display = "block";
+  document.getElementById("episode-select-label").style.display = "block";
 }
 
 window.onload = function () {
@@ -193,9 +195,29 @@ function makePageForShows(showList) {
     const showSummary = document.createElement("p");
     showSummary.innerHTML = show.summary || "No description available";
 
+    const showGenres = document.createElement("p");
+    showGenres.textContent = `Genres: ${
+      show.genres ? show.genres.join(", ") : "N/A"
+    }`;
+
+    const showStatus = document.createElement("p");
+    showStatus.textContent = `Status: ${show.status || "N/A"}`;
+
+    const showRating = document.createElement("p");
+    showRating.textContent = `Rating: ${show.rating?.average || "N/A"}`;
+
+    const showRuntime = document.createElement("p");
+    showRuntime.textContent = `Runtime: ${
+      show.runtime ? show.runtime + "min" : "N/A"
+    }`;
+
     showCard.appendChild(showTitle);
     showCard.appendChild(showImage);
     showCard.appendChild(showSummary);
+    showCard.appendChild(showGenres);
+    showCard.appendChild(showStatus);
+    showCard.appendChild(showRating);
+    showCard.appendChild(showRuntime);
 
     rootElem.appendChild(showCard);
   }
