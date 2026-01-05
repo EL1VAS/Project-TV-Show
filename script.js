@@ -180,17 +180,20 @@ function makePageForShows(showList) {
     const show = showList[i];
 
     const showCard = document.createElement("div");
-    showCard.className = "episode-card";
-
-    const showTitle = document.createElement("h2");
-    showTitle.textContent = show.name;
+    showCard.className = "show-card";
 
     const showImage = document.createElement("img");
-    showImage.className = "episode-img";
+    showImage.className = "show-img";
     showImage.src = show.image
       ? show.image.medium.replace(/^http:/, "https:")
       : "";
     showImage.alt = show.name;
+
+    const showInfo = document.createElement("div");
+    showInfo.className = "show-info";
+
+    const showTitle = document.createElement("h2");
+    showTitle.textContent = show.name;
 
     const showSummary = document.createElement("p");
     showSummary.innerHTML = show.summary || "No description available";
@@ -211,13 +214,15 @@ function makePageForShows(showList) {
       show.runtime ? show.runtime + "min" : "N/A"
     }`;
 
-    showCard.appendChild(showTitle);
+    showInfo.appendChild(showTitle);
+    showInfo.appendChild(showSummary);
+    showInfo.appendChild(showGenres);
+    showInfo.appendChild(showStatus);
+    showInfo.appendChild(showRating);
+    showInfo.appendChild(showRuntime);
+
     showCard.appendChild(showImage);
-    showCard.appendChild(showSummary);
-    showCard.appendChild(showGenres);
-    showCard.appendChild(showStatus);
-    showCard.appendChild(showRating);
-    showCard.appendChild(showRuntime);
+    showCard.appendChild(showInfo);
 
     rootElem.appendChild(showCard);
   }

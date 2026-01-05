@@ -80,3 +80,46 @@ a:hover {
   background-color: black;
   color: white;
 }
+
+/* Show cards - horizontal layout */
+.show-card {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  margin-bottom: 20px; /* Space between each show card */
+  background-color: black;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  align-items: flex-start; /* Aligns items to the top */
+}
+
+/* Show image - fixed width on the left */
+.show-img {
+  width: 250px; /* Fixed width for consistency */
+  height: 295px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0; /* Prevents image from shrinking */
+}
+
+/* Show info - takes remaining space on the right */
+.show-info {
+  flex: 1; /* Takes up all remaining space */
+  color: white;
+}
+
+.show-info h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.show-info p {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+/* Shows root - single column layout */
+#shows-root {
+  display: block; /* No grid for shows */
+  padding: 20px;
+}
