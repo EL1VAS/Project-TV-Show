@@ -22,6 +22,19 @@ function showShowsView() {
   document.getElementById("episode-select-label").style.display = "none";
 }
 
+function setupBackButton() {
+  const backButton = document.getElementById("back-to-shows");
+
+  console.log("Back button found:", backButton); // Check if button exists
+
+  backButton.addEventListener("click", function () {
+    console.log("Back button clicked!"); // Check if click is detected
+    document.getElementById("show-select").value = ""; // resets the show list
+
+    showShowsView();
+  });
+}
+
 function showEpisodesView() {
   document.getElementById("shows-view").style.display = "none";
   document.getElementById("episodes-view").style.display = "block";
@@ -46,6 +59,7 @@ window.onload = function () {
       makePageForShows(allShows);
       showShowsView();
       onShowSelect();
+      setupBackButton();
     })
     .catch((error) => {
       rootElem.textContent = "Error loading shows";
@@ -224,6 +238,34 @@ function makePageForShows(showList) {
     showCard.appendChild(showImage);
     showCard.appendChild(showInfo);
 
+    showCard.style.cursor = "pointer";
+    showCard.addEventListener("click", function () {
+      console.log("Card clicked! Show ID:", show.id); // for debugging
+
+      document.getElementById("show-select").value = show.id; // Update dropdown to match the selected episode
+      document.getElementById("episode-select").innerHTML =
+        '<option value="">All episodes</option>'; // Reset episode selector
+      document.getElementById("search-input").value = ""; // Reset search box
+
+      if (episodesCache[show.id]) {
+        loadEpisodes(episodesCache[show.id]);
+        return;
+      }
+      //Otherwise fetch episodes
+      const episodesURL = `https://api.tvmaze.com/shows/${show.id}/episodes`;
+
+      fetch(episodesURL)
+        .then((response) => response.json())
+        .then((episodes) => {
+          episodesCache[show.id] = episodes;
+          loadEpisodes(episodes);
+        })
+        .catch((error) => {
+          document.getElementById("root").textContent =
+            "Error loading episodes";
+          console.error(error);
+        });
+    });
     rootElem.appendChild(showCard);
   }
   const count = document.getElementById("episode-count");
