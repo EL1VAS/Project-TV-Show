@@ -21,7 +21,6 @@ function showShowsView() {
   document.getElementById("episode-count").style.display = "none";
 }
 
-
 function showEpisodesView() {
   document.getElementById("shows-view").style.display = "none";
   document.getElementById("episodes-view").style.display = "block";
@@ -32,31 +31,25 @@ function showEpisodesView() {
   document.getElementById("episode-count").style.display = "block";
 }
 
-
 window.onload = function () {
   // Moved it up
-  const rootElem = document.getElementById("root");
+  const rootElem = document.getElementById("shows-root");
   rootElem.textContent = "Loading shows...";
 
   fetch(SHOWS_API_URL)
-  .then((response) => response.json())
-  .then((data) => {
-    allShows = data;
-    populateShowSelector(allShows);
-    makePageForShows(allShows);
-    onShowSelect();
-  })
-  .catch((error) => {
-    rootElem.textContent = "Error loading shows";
-    console.error(error);
-  });
-  
-  .catch(function(error) {
-    rootElem.textContent = "Error loading episodes, please try again later.";
-      console.error(error);      
+    .then((response) => response.json())
+    .then((data) => {
+      allShows = data;
+      populateShowSelector(allShows);
+      makePageForShows(allShows);
+      showShowsView();
+      onShowSelect();
+    })
+    .catch((error) => {
+      rootElem.textContent = "Error loading shows";
+      console.error(error);
     });
 };
-
 
 function setup() {
   // Moved after the fetch function
@@ -71,14 +64,13 @@ function setup() {
   onSearchInput(); // live search functionality later
 }
 
-
 function populateShowSelector(shows) {
   const showSelect = document.getElementById("show-select");
   showSelect.textContent = "";
 
   // sort alphabetically, not case sensitive
   const sortedShows = shows.sort((a, b) =>
-  a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+    a.name.toLowerCase().localeCompare(b.name.toLowerCase())
   );
 
   const defaultOption = document.createElement("option");
@@ -94,7 +86,6 @@ function populateShowSelector(shows) {
   }
 }
 
-
 function onShowSelect() {
   const showSelect = document.getElementById("show-select");
 
@@ -103,11 +94,11 @@ function onShowSelect() {
 
     // reset controls
     document.getElementById("episode-select").innerHTML =
-    '<option value="">All episodes</option>';
+      '<option value="">All episodes</option>';
     document.getElementById("search-input").value = "";
 
     if (!showId) {
-      document.getElementById("root").textContent = "Please select a show";
+      showShowsView();
       return;
     }
     // If episodes already fetched, reuse
@@ -119,27 +110,25 @@ function onShowSelect() {
     const episodesURL = `https://api.tvmaze.com/shows/${showId}/episodes`;
 
     fetch(episodesURL)
-    .then((response)=> response.json())
-    .then((episodes) => {
-      episodesCache[showId] = episodes; // cache result
-      loadEpisodes(episodes);
-    })
-    .catch((error)=>{
-      document.getElementById("root").textContent =
-        "Error loading episodes";
-      console.error(error);
-    });
+      .then((response) => response.json())
+      .then((episodes) => {
+        episodesCache[showId] = episodes; // cache result
+        loadEpisodes(episodes);
+      })
+      .catch((error) => {
+        document.getElementById("root").textContent = "Error loading episodes";
+        console.error(error);
+      });
   });
 }
-
 
 function loadEpisodes(episodes) {
   allEpisodes = episodes;
   filteredEpisodes = episodes;
 
+  showEpisodesView();
   setup(); // reuses everything already built
 }
-
 
 function makePageForEpisodes(episodeList) {
   // Receive it as an episode list
@@ -182,7 +171,7 @@ function makePageForEpisodes(episodeList) {
 
 //function to display all shows when the page loads, before a show gets selected
 function makePageForShows(showList) {
-  const rootElem = document.getElementById("root");
+  const rootElem = document.getElementById("shows-root");
   rootElem.textContent = "";
 
   for (let i = 0; i < showList.length; i++) {
@@ -190,30 +179,29 @@ function makePageForShows(showList) {
 
     const showCard = document.createElement("div");
     showCard.className = "episode-card";
-    
-    const showTitle = document.createElement("h2");
-      showTitle.textContent = show.name;
 
-      const showImage = document.createElement ("img");
-      showImage.className = "episode-img";
-      showImage.src = show.image
+    const showTitle = document.createElement("h2");
+    showTitle.textContent = show.name;
+
+    const showImage = document.createElement("img");
+    showImage.className = "episode-img";
+    showImage.src = show.image
       ? show.image.medium.replace(/^http:/, "https:")
       : "";
-      showImage.alt = show.name;
+    showImage.alt = show.name;
 
-      const showSummary = document.createElement ("p");
-      showSummary.innerHTML = show.summary || "No description available";
+    const showSummary = document.createElement("p");
+    showSummary.innerHTML = show.summary || "No description available";
 
-      showCard.appendChild(showTitle);
-      showCard.appendChild(showImage);
-      showCard.appendChild(showSummary);
+    showCard.appendChild(showTitle);
+    showCard.appendChild(showImage);
+    showCard.appendChild(showSummary);
 
-      rootElem.appendChild(showCard);
+    rootElem.appendChild(showCard);
   }
   const count = document.getElementById("episode-count");
   count.textContent = `Showing ${showList.length} shows`;
 }
-
 
 // dropdown function - fills the menu with all episodes information
 function populateEpisodeSelector(episodes) {
@@ -234,7 +222,6 @@ function populateEpisodeSelector(episodes) {
     select.appendChild(option);
   }
 }
-
 
 // selecting episode from dropdown menu
 function onEpisodeSelect() {
@@ -271,7 +258,6 @@ function onEpisodeSelect() {
     return;
   });
 }
-
 
 // live search functionality to the search input
 function onSearchInput() {
