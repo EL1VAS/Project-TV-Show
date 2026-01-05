@@ -22,6 +22,7 @@ function showShowsView() {
   document.getElementById("episode-select-label").style.display = "none";
 
   document.getElementById("show-search-input").style.display = "block";
+  document.getElementById("show-count").style.display = "block";
 }
 
 function setupBackButton() {
@@ -48,6 +49,7 @@ function showEpisodesView() {
   document.getElementById("episode-select-label").style.display = "block";
 
   document.getElementById("show-search-input").style.display = "none";
+  document.getElementById("show-count").style.display = "none";
 }
 
 window.onload = function () {
@@ -273,7 +275,7 @@ function makePageForShows(showList) {
     });
     rootElem.appendChild(showCard);
   }
-  const count = document.getElementById("episode-count");
+  const count = document.getElementById("show-count");
   count.textContent = `Showing ${showList.length} shows`;
 }
 
@@ -379,5 +381,8 @@ function onShowSearchInput() {
     });
 
     makePageForShows(filteredShows); // Display filtered shows
+
+    const showCount = document.getElementById("show-count");
+    showCount.textContent = `Found ${filteredShows.length} shows`;
   });
 }
