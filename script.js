@@ -11,6 +11,28 @@ const SHOWS_API_URL = "https://api.tvmaze.com/shows";
 let allShows = []; // stores all fetched shows
 let episodesCache = {}; // to not fetch the same URL twice
 
+function showShowsView() {
+  document.getElementById("shows-view").style.display = "block";
+  document.getElementById("episodes-view").style.display = "none";
+
+  // Hide episode specific controls
+  document.getElementById("episode-select").style.display = "none";
+  document.getElementById("search-input").style.display = "none";
+  document.getElementById("episode-count").style.display = "none";
+}
+
+
+function showEpisodesView() {
+  document.getElementById("shows-view").style.display = "none";
+  document.getElementById("episodes-view").style.display = "block";
+
+  // Hide episode specific controls
+  document.getElementById("episode-select").style.display = "block";
+  document.getElementById("search-input").style.display = "block";
+  document.getElementById("episode-count").style.display = "block";
+}
+
+
 window.onload = function () {
   // Moved it up
   const rootElem = document.getElementById("root");
@@ -28,27 +50,13 @@ window.onload = function () {
     rootElem.textContent = "Error loading shows";
     console.error(error);
   });
-  /*const loadingDiv = document.createElement("div");
-  loadingDiv.className = "loading-message";
-  loadingDiv.textContent = "Loading episodes...";
-  rootElem.appendChild(loadingDiv);
-
-  fetch(API_URL)
-    .then(function (response) {
-      // returns the response as a json file
-      return response.json();
-    })
-    .then(function (data) {
-      allEpisodes = data; // Fills the empty array in our global scope
-      filteredEpisodes = allEpisodes; // At this moment we aren't filtering
-      rootElem.textContent = ""; // Clear loading text
-      setup(); // Now we run all functions with the data that we fetced and filled the empty array
-    })
-    .catch(function (error) {
-      rootElem.textContent = "Error loading episodes, please try again later.";
-      console.error(error);
-    });*/
+  
+  .catch(function(error) {
+    rootElem.textContent = "Error loading episodes, please try again later.";
+      console.error(error);      
+    });
 };
+
 
 function setup() {
   // Moved after the fetch function
@@ -62,6 +70,7 @@ function setup() {
   onEpisodeSelect(); // Filters by episode later
   onSearchInput(); // live search functionality later
 }
+
 
 function populateShowSelector(shows) {
   const showSelect = document.getElementById("show-select");
@@ -84,6 +93,7 @@ function populateShowSelector(shows) {
     showSelect.appendChild(option);
   }
 }
+
 
 function onShowSelect() {
   const showSelect = document.getElementById("show-select");
@@ -122,12 +132,15 @@ function onShowSelect() {
   });
 }
 
+
 function loadEpisodes(episodes) {
   allEpisodes = episodes;
   filteredEpisodes = episodes;
 
   setup(); // reuses everything already built
 }
+
+
 function makePageForEpisodes(episodeList) {
   // Receive it as an episode list
   const rootElem = document.getElementById("root"); // Access the root in html
@@ -201,6 +214,7 @@ function makePageForShows(showList) {
   count.textContent = `Showing ${showList.length} shows`;
 }
 
+
 // dropdown function - fills the menu with all episodes information
 function populateEpisodeSelector(episodes) {
   const select = document.getElementById("episode-select");
@@ -220,6 +234,7 @@ function populateEpisodeSelector(episodes) {
     select.appendChild(option);
   }
 }
+
 
 // selecting episode from dropdown menu
 function onEpisodeSelect() {
@@ -256,6 +271,7 @@ function onEpisodeSelect() {
     return;
   });
 }
+
 
 // live search functionality to the search input
 function onSearchInput() {
