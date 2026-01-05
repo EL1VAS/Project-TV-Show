@@ -20,6 +20,8 @@ function showShowsView() {
   document.getElementById("search-input").style.display = "none";
   document.getElementById("episode-count").style.display = "none";
   document.getElementById("episode-select-label").style.display = "none";
+
+  document.getElementById("show-search-input").style.display = "block";
 }
 
 function setupBackButton() {
@@ -44,6 +46,8 @@ function showEpisodesView() {
   document.getElementById("search-input").style.display = "block";
   document.getElementById("episode-count").style.display = "block";
   document.getElementById("episode-select-label").style.display = "block";
+
+  document.getElementById("show-search-input").style.display = "none";
 }
 
 window.onload = function () {
@@ -348,32 +352,32 @@ function onSearchInput() {
       );
     });
 
-    function onShowSearchInput() {
-      const searchInput = document.getElementById("show-search-input");
-
-      searchInput.addEventListener("input", function (event) {
-        const searchTerm = event.target.value.toLowerCase();
-
-        const filteredShows = allShows.filter(function (show) {
-          const matchesName = show.name.toLowerCase().includes(searchTerm);
-          const matchesGenres = show.genres
-            ? show.genres.join(", ").toLowerCase().includes(searchTerm)
-            : false;
-          const matchesSummary = show.summary
-            ? show.summary.toLowerCase().includes(searchTerm)
-            : false;
-
-          return matchesName || matchesGenres || matchesSummary;
-        });
-
-        makePageForShows(filteredShows); // Display filtered shows
-      });
-    }
-
     makePageForEpisodes(filteredEpisodes); // display only the matching result
 
     //update the episode count
     const count = document.getElementById("episode-count");
     count.textContent = `Showing ${filteredEpisodes.length} out of ${allEpisodes.length} episodes`;
+  });
+}
+
+function onShowSearchInput() {
+  const searchInput = document.getElementById("show-search-input");
+
+  searchInput.addEventListener("input", function (event) {
+    const searchTerm = event.target.value.toLowerCase();
+
+    const filteredShows = allShows.filter(function (show) {
+      const matchesName = show.name.toLowerCase().includes(searchTerm);
+      const matchesGenres = show.genres
+        ? show.genres.join(", ").toLowerCase().includes(searchTerm)
+        : false;
+      const matchesSummary = show.summary
+        ? show.summary.toLowerCase().includes(searchTerm)
+        : false;
+
+      return matchesName || matchesGenres || matchesSummary;
+    });
+
+    makePageForShows(filteredShows); // Display filtered shows
   });
 }
