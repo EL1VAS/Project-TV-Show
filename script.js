@@ -16,13 +16,14 @@ function showShowsView() {
   document.getElementById("episodes-view").style.display = "none";
 
   // Hide episode specific controls
-  document.getElementById("episode-select").style.display = "none";
+  document.getElementById("episode-select-label").style.display = "none";
   document.getElementById("search-input").style.display = "none";
   document.getElementById("episode-count").style.display = "none";
   document.getElementById("episode-select-label").style.display = "none";
 
-  document.getElementById("show-search-input").style.display = "block";
+  document.getElementById("show-search-input").style.display = "flex";
   document.getElementById("show-count").style.display = "block";
+  document.getElementById("show-select").parentElement.style.display = "flex";
 }
 
 function setupBackButton() {
@@ -43,13 +44,13 @@ function showEpisodesView() {
   document.getElementById("episodes-view").style.display = "block";
 
   // Hide episode specific controls
-  document.getElementById("episode-select").style.display = "block";
-  document.getElementById("search-input").style.display = "block";
+  document.getElementById("episode-select-label").style.display = "flex";
+  document.getElementById("search-input").style.display = "flex";
   document.getElementById("episode-count").style.display = "block";
-  document.getElementById("episode-select-label").style.display = "block";
 
   document.getElementById("show-search-input").style.display = "none";
   document.getElementById("show-count").style.display = "none";
+  document.getElementById("show-select").parentElement.style.display = "flex";
 }
 
 window.onload = function () {
