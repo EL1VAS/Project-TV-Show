@@ -16,14 +16,22 @@
 
   <body>
     <header>
-      <label>
+      <label id="show-select-label">
         Choose a show:
         <select id="show-select">
           <option value="">Loading shows...</option>
         </select>
       </label>
-      Search shows:
-      <input type="text" id="show-search-input" placeholder="Search shows..." />
+
+      <label id="show-search-label">
+        Search shows:
+        <input
+          type="text"
+          id="show-search-input"
+          placeholder="Search shows..."
+        />
+      </label>
+
       <p id="show-count"></p>
 
       <label id="episode-select-label">
@@ -33,7 +41,10 @@
         </select>
       </label>
 
-      <input type="text" id="search-input" placeholder="Search episodes..." />
+      <label id="search-input-label">
+        Search an episode:
+        <input type="text" id="search-input" placeholder="Search episodes..." />
+      </label>
 
       <p id="episode-count"></p>
     </header>

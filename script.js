@@ -15,15 +15,14 @@ function showShowsView() {
   document.getElementById("shows-view").style.display = "block";
   document.getElementById("episodes-view").style.display = "none";
 
+  document.getElementById("show-select-label").style.display = "inline-flex";
+  document.getElementById("show-search-label").style.display = "inline-flex";
+  document.getElementById("show-count").style.display = "block";
+
   // Hide episode specific controls
   document.getElementById("episode-select-label").style.display = "none";
-  document.getElementById("search-input").style.display = "none";
+  document.getElementById("search-input-label").style.display = "none";
   document.getElementById("episode-count").style.display = "none";
-  document.getElementById("episode-select-label").style.display = "none";
-
-  document.getElementById("show-search-input").style.display = "flex";
-  document.getElementById("show-count").style.display = "block";
-  document.getElementById("show-select").parentElement.style.display = "flex";
 }
 
 function setupBackButton() {
@@ -43,14 +42,15 @@ function showEpisodesView() {
   document.getElementById("shows-view").style.display = "none";
   document.getElementById("episodes-view").style.display = "block";
 
-  // Hide episode specific controls
-  document.getElementById("episode-select-label").style.display = "flex";
-  document.getElementById("search-input").style.display = "flex";
+  // Show all controls on episodes page
+  document.getElementById("show-select-label").style.display = "inline-flex";
+  document.getElementById("episode-select-label").style.display = "inline-flex";
+  document.getElementById("search-input-label").style.display = "inline-flex";
   document.getElementById("episode-count").style.display = "block";
 
-  document.getElementById("show-search-input").style.display = "none";
+  // Hide show search controls
+  document.getElementById("show-search-label").style.display = "none";
   document.getElementById("show-count").style.display = "none";
-  document.getElementById("show-select").parentElement.style.display = "flex";
 }
 
 window.onload = function () {
